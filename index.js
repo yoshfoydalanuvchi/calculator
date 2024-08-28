@@ -6,7 +6,7 @@ function number(i) {
 
 function calc() {
   try {
-    let expression = display.value.replace("%", "/100");
+    let expression = display.value.replace("%", "/100").replace("e", "Math.E");
     display.value = eval(expression);
   } catch (err) {
     alert("Noto`g`ri formatdan foydalanildi");
@@ -37,8 +37,7 @@ function spc() {
     key === "*" ||
     key === "/" ||
     key === "." ||
-    key === "e" ||
-    key === "E"
+    key === "e"
   ) {
     number(key);
   } else if (key === "Enter") {
