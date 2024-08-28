@@ -1,25 +1,30 @@
 const display = document.getElementById("display");
 
-function number(i) {
-  display.value += i;
-}
+display.value = "0";
 
+function number(i) {
+  if (display.value === "0") {
+    display.value = i;
+  } else {
+    display.value += i;
+  }
+}
 function calc() {
   try {
     let expression = display.value.replace("%", "/100").replace("e", "Math.E");
     display.value = eval(expression);
   } catch (err) {
     alert("Noto`g`ri formatdan foydalanildi");
-    // display.value = "";
+    display.value = "0";
   }
 }
 
 function clearAll() {
-  display.value = "";
+  display.value = "0";
 }
 
 function clearOne() {
-  display.value = display.value.slice(0, -1);
+  display.value = display.value.slice(0, -1) || "0";
 }
 
 function percent() {
@@ -30,7 +35,11 @@ function spc() {
   key = event.key;
 
   if (key >= 0 && key <= 9) {
-    number(key);
+    if (display.value === "0") {
+      display.value = key;
+    } else {
+      display.value += key;
+    }
   } else if (
     key === "+" ||
     key === "-" ||
